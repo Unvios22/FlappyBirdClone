@@ -5,14 +5,19 @@ public class PlayerBehavior : MonoBehaviour {
 	[SerializeField] private float maxFallVelocity = 100f;
 	[SerializeField] private float fallAccSpeed = 10f;
 	[SerializeField] private float tiltDownSpeed = 1f;
+	
 	private Rigidbody2D rigidbody2D;
 	private Quaternion forwardRotation;
 	private Quaternion downRotation;
+	private ScoreManager _scoreManager;
+	private GameManager _gameManager;
 
 	private void Start() {
 		rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
 		forwardRotation = Quaternion.Euler(0,0,35);
 		downRotation = Quaternion.Euler(0,0,-90);
+		_scoreManager = FindObjectOfType<ScoreManager>();
+		_gameManager = FindObjectOfType<GameManager>();
 	}
 
 	private void Update() {
@@ -39,9 +44,12 @@ public class PlayerBehavior : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.CompareTag(Tags.OBSTACLE)) {
-			//TODO: Implement losing mechanic
+		if (other.gameObject.CompareTag(Tags.OBSTACLE_KILL)) {
+			_gameManager.GameOver();
 			Debug.Log("YOU DIED!");
+		}
+		else if (other.gameObject.CompareTag(Tags.OBSTACLE_TRIGGER)) {
+			_scoreManager.Score++;
 		}
 	}
 }
