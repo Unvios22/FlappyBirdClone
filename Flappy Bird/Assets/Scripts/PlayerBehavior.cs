@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour {
-	public float JumpForce = 10f;
-	public float maxFallVelocity = 100f;
-	public float FallAccSpeed = 10f;
+	[SerializeField] private float jumpForce = 10f;
+	[SerializeField] private float maxFallVelocity = 100f;
+	[SerializeField] private float fallAccSpeed = 10f;
 	private Rigidbody2D rigidbody2D;
 
 	private void Start() {
@@ -21,14 +21,14 @@ public class PlayerBehavior : MonoBehaviour {
 	private void GetUserInput() {
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			rigidbody2D.velocity = Vector2.zero;
-			var forceVector = new Vector2(0, JumpForce);
+			var forceVector = new Vector2(0, jumpForce);
 			rigidbody2D.AddForce(forceVector,ForceMode2D.Impulse);
 		}
 	}
 
 	private void AddFallVelocity() {
 		if (rigidbody2D.velocity.y >= -maxFallVelocity) {
-			var forceVector = new Vector2(0, -FallAccSpeed);
+			var forceVector = new Vector2(0, -fallAccSpeed);
 			rigidbody2D.AddForce(forceVector,ForceMode2D.Force);
 		}
 	}
