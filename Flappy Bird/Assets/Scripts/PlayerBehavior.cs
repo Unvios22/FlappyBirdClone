@@ -4,10 +4,15 @@ public class PlayerBehavior : MonoBehaviour {
 	[SerializeField] private float jumpForce = 10f;
 	[SerializeField] private float maxFallVelocity = 100f;
 	[SerializeField] private float fallAccSpeed = 10f;
+	[SerializeField] private float tiltDownSpeed = 1f;
 	private Rigidbody2D rigidbody2D;
+	private Quaternion forwardRotation;
+	private Quaternion downRotation;
 
 	private void Start() {
 		rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+		forwardRotation = Quaternion.Euler(0,0,35);
+		downRotation = Quaternion.Euler(0,0,-90);
 	}
 
 	private void Update() {
@@ -20,7 +25,10 @@ public class PlayerBehavior : MonoBehaviour {
 			rigidbody2D.velocity = Vector2.zero;
 			var forceVector = new Vector2(0, jumpForce);
 			rigidbody2D.AddForce(forceVector,ForceMode2D.Impulse);
+			transform.rotation = forwardRotation;
 		}
+		transform.rotation = Quaternion.Lerp(transform.rotation,downRotation,tiltDownSpeed * Time.deltaTime);
+
 	}
 
 	private void AddFallVelocity() {
