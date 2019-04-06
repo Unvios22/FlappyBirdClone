@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour {
 	[SerializeField] private float jumpForce = 10f;
@@ -32,5 +29,11 @@ public class PlayerBehavior : MonoBehaviour {
 			rigidbody2D.AddForce(forceVector,ForceMode2D.Force);
 		}
 	}
-	
+
+	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.CompareTag(Tags.OBSTACLE)) {
+			//TODO: Implement losing mechanic
+			Debug.Log("YOU DIED!");
+		}
+	}
 }
