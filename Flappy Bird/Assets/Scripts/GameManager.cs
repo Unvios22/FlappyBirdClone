@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour {
 		if (isGameOver & Input.GetKeyDown(KeyCode.Space)){
 			RestartGame();
 		}
+
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			Application.Quit();
+		}
 	}
 
 	public void GameOver() {
@@ -33,6 +37,7 @@ public class GameManager : MonoBehaviour {
 		gameOverText.gameObject.SetActive(true);
 		Time.timeScale = 0f;
 	}
+	
 	
 	private void StartGame() {
 		Time.timeScale = 1f;
@@ -52,6 +57,7 @@ public class GameManager : MonoBehaviour {
 		}
 		player.transform.position = new Vector2(0,0);
 		player.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+		
 		scoreManager.ResetScore();
 	}
 }
