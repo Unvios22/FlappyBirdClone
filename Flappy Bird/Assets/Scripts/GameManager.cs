@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour {
 	private bool isGameStarted;
 	[SerializeField] private Text gameOverText;
 	[SerializeField] private ScoreManager scoreManager;
-	[SerializeField] private GameObject player;
+	[SerializeField] private PlayerBehavior player;
 
 	private void Start() {
-		player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
+		player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerBehavior>();
 		Time.timeScale = 0f;
 	}
 
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
 
 	public void GameOver() {
 		isGameOver = true;
+		player.enabled = false;
 		gameOverText.gameObject.SetActive(true);
 		Time.timeScale = 0f;
 	}
@@ -45,10 +46,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void RestartGame() {
-		ResetGameState();
 		isGameOver = false;
+		player.enabled = true;
 		gameOverText.gameObject.SetActive(false);
 		Time.timeScale = 1f;
+		ResetGameState();
+		
 	}
 
 	private void ResetGameState() {
@@ -56,8 +59,7 @@ public class GameManager : MonoBehaviour {
 			Destroy(obstacle.gameObject);
 		}
 		player.transform.position = new Vector2(0,0);
-		player.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-		
+		player.ResetState();
 		scoreManager.ResetScore();
 	}
 }

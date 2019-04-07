@@ -9,7 +9,11 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField] private Text scoreText;
 
     private void Update() {
-        scoreText.text= "Score: " + Score;
+        UpdateScoreDisplay();
+    }
+
+    private void UpdateScoreDisplay() {
+        scoreText.text= "Score: " + Score; 
     }
 
     public void ResetScore() {
