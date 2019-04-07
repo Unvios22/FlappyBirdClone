@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-	private bool isGameOver;
-	private bool isGameStarted;
+	private bool _isGameOver;
+	private bool _isGameStarted;
 	[SerializeField] private Text gameOverText;
 	[SerializeField] private ScoreManager scoreManager;
 	[SerializeField] private PlayerBehavior player;
@@ -19,11 +19,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void Update() {
-		if (!isGameStarted & Input.GetKeyDown(KeyCode.Space)) {
+		if (!_isGameStarted & Input.GetKeyDown(KeyCode.Space)) {
 			StartGame();
 		}
 		
-		if (isGameOver & Input.GetKeyDown(KeyCode.Space)){
+		if (_isGameOver & Input.GetKeyDown(KeyCode.Space)){
 			RestartGame();
 		}
 
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		isGameOver = true;
+		_isGameOver = true;
 		player.enabled = false;
 		gameOverText.gameObject.SetActive(true);
 		Time.timeScale = 0f;
@@ -42,11 +42,11 @@ public class GameManager : MonoBehaviour {
 	
 	private void StartGame() {
 		Time.timeScale = 1f;
-		isGameStarted = true;
+		_isGameStarted = true;
 	}
 
 	private void RestartGame() {
-		isGameOver = false;
+		_isGameOver = false;
 		player.enabled = true;
 		gameOverText.gameObject.SetActive(false);
 		Time.timeScale = 1f;
