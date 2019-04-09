@@ -21,6 +21,7 @@ public class Obstacle : MonoBehaviour {
 	
 	private void SetMotion() {
 		var forceVector = new Vector2(-obstacleSpeed,0);
+		// obstacle speed < 0 to move object to the left
 		_rigidbody2D.AddForce(forceVector,ForceMode2D.Impulse);
 	}
 
