@@ -1,22 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour {
-    public int Score = 0;
-
+    
     [SerializeField] private Text scoreText;
+    private int _score;
 
+    public void ResetScore() {
+        _score = 0;
+    }
+
+    public void IncreaseScore(int pointsAmount) {
+        _score += pointsAmount;
+    }
+    
     private void Update() {
         UpdateScoreDisplay();
     }
 
     private void UpdateScoreDisplay() {
-        scoreText.text= "Score: " + Score; 
-    }
-
-    public void ResetScore() {
-        Score = 0;
+        scoreText.text= "Score: " + _score; 
     }
 }

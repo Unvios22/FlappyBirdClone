@@ -1,21 +1,25 @@
 ﻿using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour {
+	
 	[SerializeField] private float jumpForce = 12f;
 	[SerializeField] private float maxFallVelocity = 10f;
 	[SerializeField] private float fallAccSpeed = 10f;
 	[SerializeField] private float tiltDownSpeed = 1f;
 	
+	private static readonly Quaternion ForwardRotation = Quaternion.Euler(0,0,45);
+	private static readonly Quaternion DownRotation = Quaternion.Euler(0,0,-90);
+	
 	private Rigidbody2D _rigidbody2D;
-	private Quaternion _forwardRotation;
-	private Quaternion _downRotation;
 	private ScoreManager _scoreManager;
 	private GameManager _gameManager;
 
 	private void Start() {
+		FindReferences();
+	}
+
+	private void FindReferences() {
 		_rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-		_forwardRotation = Quaternion.Euler(0,0,45);
-		_downRotation = Quaternion.Euler(0,0,-90);
 		_scoreManager = FindObjectOfType<ScoreManager>();
 		_gameManager = FindObjectOfType<GameManager>();
 	}
@@ -28,9 +32,9 @@ public class PlayerBehavior : MonoBehaviour {
 	private void GetUserInput() {
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			ApplyJumpForce();
-			transform.rotation = _forwardRotation;
+			transform.rotation = ForwardRotation;
 		}	
-		transform.rotation = Quaternion.Lerp(transform.rotation,_downRotation,tiltDownSpeed * Time.deltaTime);
+		transform.rotation = Quaternion.Lerp(transform.rotation,DownRotation,tiltDownSpeed * Time.deltaTime);
 
 	}
 
@@ -53,12 +57,12 @@ public class PlayerBehavior : MonoBehaviour {
 			Debug.Log("YOU DIED!");
 		}
 		else if (other.gameObject.CompareTag(Tags.OBSTACLE_TRIGGER)) {
-			_scoreManager.Score++;
+			_scoreManager.IncreaseScore(1);
 		}
 	}
 
-	public void ResetState() {
+	public void ResetPlayerState() {
 		_rigidbody2D.velocity = Vector2.zero;
-		transform.rotation = _forwardRotation;
+		transform.rotation = ForwardRotation;
 	}
 }

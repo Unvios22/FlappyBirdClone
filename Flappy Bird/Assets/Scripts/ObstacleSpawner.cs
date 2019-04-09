@@ -4,8 +4,8 @@ using UnityEngine;
 public class ObstacleSpawner : MonoBehaviour {
 
 	[SerializeField] private GameObject obstaclePrefab;
-	[SerializeField] private float spawnInterval = 3;
 	[SerializeField] private Transform spawnPoint;
+	[SerializeField] private float spawnInterval = 3;
 
 	private void Start() {
 		StartCoroutine(SpawnObstacles());
@@ -19,6 +19,6 @@ public class ObstacleSpawner : MonoBehaviour {
 	}
 
 	private void SpawnObstacle() {
-		var obstacle = Instantiate(obstaclePrefab,spawnPoint.position, Quaternion.identity);
+		Instantiate(obstaclePrefab,spawnPoint.position, Quaternion.identity);
 	}
 }

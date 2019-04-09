@@ -266,7 +266,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverText: {fileID: 1875297902}
   scoreManager: {fileID: 192113119}
-  player: {fileID: 45365285}
 --- !u!4 &43822430
 Transform:
   m_ObjectHideFlags: 0
@@ -346,7 +345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0615e8d86d5b3e40852ea6567374ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 0
   scoreText: {fileID: 1735459706}
 --- !u!1 &192909148
 GameObject:
@@ -618,7 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a90a26a3b757044b80d545a4739eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgSpeed: 0.2
+  scrollingSpeed: 0.2
   bgRenderer: {fileID: 772972285}
 --- !u!23 &772972285
 MeshRenderer:

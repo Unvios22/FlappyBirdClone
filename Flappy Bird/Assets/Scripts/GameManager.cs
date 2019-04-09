@@ -6,15 +6,23 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
-
-	private bool _isGameOver;
-	private bool _isGameStarted;
+	
 	[SerializeField] private Text gameOverText;
 	[SerializeField] private ScoreManager scoreManager;
-	[SerializeField] private PlayerBehavior player;
+	
+	private PlayerBehavior _player;
+	private bool _isGameOver;
+	private bool _isGameStarted;
 
+	public void GameOver() {
+		_isGameOver = true;
+		_player.enabled = false;
+		gameOverText.gameObject.SetActive(true);
+		Time.timeScale = 0f;
+	}
+	
 	private void Start() {
-		player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerBehavior>();
+		_player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerBehavior>();
 		Time.timeScale = 0f;
 	}
 
@@ -31,14 +39,6 @@ public class GameManager : MonoBehaviour {
 			Application.Quit();
 		}
 	}
-
-	public void GameOver() {
-		_isGameOver = true;
-		player.enabled = false;
-		gameOverText.gameObject.SetActive(true);
-		Time.timeScale = 0f;
-	}
-	
 	
 	private void StartGame() {
 		Time.timeScale = 1f;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
 
 	private void RestartGame() {
 		_isGameOver = false;
-		player.enabled = true;
+		_player.enabled = true;
 		gameOverText.gameObject.SetActive(false);
 		Time.timeScale = 1f;
 		ResetGameState();
@@ -58,8 +58,8 @@ public class GameManager : MonoBehaviour {
 		foreach (var obstacle in FindObjectsOfType<Obstacle>()) {
 			Destroy(obstacle.gameObject);
 		}
-		player.transform.position = new Vector2(0,0);
-		player.ResetState();
+		_player.transform.position = new Vector2(0,0);
+		_player.ResetPlayerState();
 		scoreManager.ResetScore();
 	}
 }
