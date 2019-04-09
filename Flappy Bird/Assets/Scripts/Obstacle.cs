@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Obstacle : MonoBehaviour {
 
 	[SerializeField] private float maxHeight = 1.5f;
