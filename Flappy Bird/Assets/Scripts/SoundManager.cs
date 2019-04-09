@@ -1,18 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SoundManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+[RequireComponent(typeof(AudioSource))]
+public class SoundManager : MonoBehaviour {
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip triggerSound;
+
+    private AudioSource _audioSource;
+
+    private void Start() {
+        _audioSource = gameObject.GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void PlayJumpSound() {
+        _audioSource.PlayOneShot(jumpSound);
+    }
+
+    public void PlayTriggerSound() {
+        _audioSource.PlayOneShot(triggerSound);
     }
 }

@@ -13,6 +13,7 @@ public class PlayerBehavior : MonoBehaviour {
 	private Rigidbody2D _rigidbody2D;
 	private ScoreManager _scoreManager;
 	private GameManager _gameManager;
+	private SoundManager _soundManager;
 
 	private void Start() {
 		FindReferences();
@@ -22,6 +23,7 @@ public class PlayerBehavior : MonoBehaviour {
 		_rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
 		_scoreManager = FindObjectOfType<ScoreManager>();
 		_gameManager = FindObjectOfType<GameManager>();
+		_soundManager = FindObjectOfType<SoundManager>();
 	}
 
 	private void Update() {
@@ -31,6 +33,7 @@ public class PlayerBehavior : MonoBehaviour {
 
 	private void GetUserInput() {
 		if (Input.GetKeyDown(KeyCode.Space)) {
+			_soundManager.PlayJumpSound();
 			ApplyJumpForce();
 			transform.rotation = ForwardRotation;
 		}	
@@ -58,6 +61,7 @@ public class PlayerBehavior : MonoBehaviour {
 		}
 		else if (other.gameObject.CompareTag(Tags.OBSTACLE_TRIGGER)) {
 			_scoreManager.IncreaseScore(1);
+			_soundManager.PlayTriggerSound();
 		}
 	}
 
