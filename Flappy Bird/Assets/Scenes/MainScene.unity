@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSound: {fileID: 8300000, guid: 86b37ada402195d4c9b4ed869bf7fb18, type: 3}
-  triggerSound: {fileID: 8300000, guid: 8321059b3dd660a4388b139207218771, type: 3}
+  triggerSound: {fileID: 8300000, guid: afc3d4eacb9b5594fae7a2c12395da1f, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
