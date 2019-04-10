@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
 	private void Start() {
 		_player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerBehavior>();
 		Time.timeScale = 0f;
+		_player.enabled = false;
 	}
 
 	private void Update() {
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour {
 	
 	private void StartGame() {
 		Time.timeScale = 1f;
+		_player.enabled = true;
 		_isGameStarted = true;
 	}
 
