@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class SoundManager : MonoBehaviour {
+public class SfxManager : MonoBehaviour {
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip triggerSound;
 
